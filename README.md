@@ -6,7 +6,7 @@ This plugin is designed to provide one or more buttons which cycle through prede
 
 Toggling is controlled by the eye button appearing in the toolbar.  If any matching content is found on the page the eye is underlined.
 
-Buttons can be added, removed or reconfigured as desired.
+Buttons can be added, removed or reconfigured as desired.  *Toggling to-do visibility wasn't meant to be the sole purpose of this plugin.*  Rather this feature provides an example of what's possible.  The purpose is to allow you to configure buttons which conditionally find and style content in whatever manner you dream up.
 
 ## Configurable Settings
 
@@ -51,6 +51,6 @@ Use Character Map (a tool on Windows) to look up the codes associated with the t
   * Open Plugins
   * Select `Load unpacked plugin`
 
-### License
+## License
 [MIT](./LICENSE.md)
 
