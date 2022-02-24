@@ -8,6 +8,12 @@ Toggling is controlled by the eye button appearing in the toolbar.  If any match
 
 Buttons can be added, removed or reconfigured as desired.  *Toggling to-do visibility wasn't meant to be the sole purpose of this plugin.*  Rather this feature provides an example of what's possible.  The purpose is to allow you to configure buttons which conditionally find and style content in whatever manner you dream up.
 
+## IMPORTANT
+
+The _current implementation fails_ when installed from the marketplace due to cross-origin iframe issues caused by the call to `top.document` in [index.js](index.js).  Until I solve this you will be better served to install it as described under Manual Installation.
+
+If you have any ideas, feel free to reach out.
+
 ## Configurable Settings
 
 Define one or more `buttons` with the following properties:
