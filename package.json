@@ -1,0 +1,16 @@
+{
+  "name": "logseq-style-carousel",
+  "version": "1.0.0",
+  "author": "Mario T. Lanza",
+  "main": "index.html",
+  "description": "Toggle visibility of completed and canceled to-dos.  Buttons may be added/reconfigured for any imaginable style effects.",
+  "license": "MIT",
+  "browserslist": [
+    "chrome 80"
+  ],
+  "logseq": {
+    "id": "logseq-style-carousel",
+    "title": "Style Carousel",
+    "icon": "carousel.png"
+  }
+}
