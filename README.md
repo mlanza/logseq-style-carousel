@@ -10,7 +10,7 @@ Buttons can be added, removed or reconfigured as desired.  *Toggling to-do visib
 
 ## IMPORTANT
 
-The _current implementation fails_ when installed from the marketplace due to cross-origin iframe issues caused by the call to `top.document` in [index.js](index.js).  Until I solve this you will be better served to install it as described under Manual Installation.
+The `hits` feature will not work when installed from the marketplace due to cross-origin iframe issues caused by the call to `top.document` in [index.js](index.js).  Until I solve this you can either install it as described under Manual Installation or simply accept this one feature will be disabled.
 
 If you have any ideas, feel free to reach out.
 
