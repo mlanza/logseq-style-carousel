@@ -8,7 +8,7 @@ Toggling is controlled by the eye button appearing in the toolbar.  If any match
 
 Buttons can be added, removed or reconfigured as desired.  *Toggling to-do visibility wasn't meant to be the sole purpose of this plugin.*  Rather this feature provides an example of what's possible.  The purpose is to allow you to configure buttons which conditionally find and style content in whatever manner you dream up.
 
-**The `hits` feature will not work when installed from the marketplace due to [cross-origin iframe issues](https://discuss.logseq.com/t/need-help-resolving-a-plugin-issue-regarding-cross-frame-origin/5750) caused by the call to `top.document` in [index.js](index.js).  You can either accept this deficit or if you prefer to have the feature, install the plugin locally as described under Manual Installation.**
+**The `hits` feature will not work when installed from the marketplace due to [cross-origin iframe issues](https://discuss.logseq.com/t/need-help-resolving-a-plugin-issue-regarding-cross-frame-origin/5750) caused by the call to `top.document` in [index.js](index.js).  You can either accept this deficit or if you prefer to have the feature, [install the plugin locally](#manual-installation).**
 
 ## Configurable Settings
 
