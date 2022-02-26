@@ -5,7 +5,7 @@ const config = {
       hits: ["text-decoration: underline;", ""],
       styles: [{
         char: "\\ecf0",
-        style: `div[data-refs-self*='"done"'], div[data-refs-self*='"canceled"'] {display: none;}`,
+        style: `div[data-refs-self*='"done"']:not(:focus-within), div[data-refs-self*='"canceled"']:not(:focus-within) {display: none;}`,
         hits: `div#main-content-container div[data-refs-self*='"done"'], div#main-content-container div[data-refs-self*='"canceled"']`
       },{
         char: "\\ea9a",
