@@ -69,7 +69,7 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
         "char": "\\eb3e",
         "query": "[:find (pull ?block [*]) :in $ ?start ?end :where (or [?block :block/scheduled ?d] [?block :block/deadline ?d]) [(> ?d ?start)] [(< ?d ?end)]]",
         "inputs": ["today 1", "today 10000"],
-        "matches": ["."],
+        "matches": [],
         "hit": "div[blockid=\"@uuid\"]",
         "rules": "{display: none;}"
       }, {
@@ -77,7 +77,7 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
         "char": "\\eb3f",
         "query": "[:find (pull ?block [*]) :in $ ?start ?end :where (or [?block :block/scheduled ?d] [?block :block/deadline ?d]) [(> ?d ?start)] [(< ?d ?end)]]",
         "inputs": ["today 1", "today 10000"],
-        "matches": ["."],
+        "matches": [],
         "hit": "div[blockid=\"@uuid\"]",
         "selector": "div#main-content-container:hover div[blockid=\"@uuid\"]",
         "rules": "{text-decoration: underline wavy;}"
