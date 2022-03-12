@@ -133,9 +133,9 @@ async function refresh(key, config, state){
   detectHits(key, config, state);
 }
 
-const detectHits = parentAccess ? function(key, config, state){
+function detectHits(key, config, state){
   if (state.hits) {
-    const el = top.document.querySelector(state.hits);
+    const el = parentAccess ? top.document.querySelector(state.hits) : null;
     const style = el ? config.hits[0] : config.hits[1];
     logseq.provideStyle({
       key: `hits-${key}`,
@@ -145,13 +145,13 @@ const detectHits = parentAccess ? function(key, config, state){
       }`
     });
   }
-} : function(){};
+}
 
-const refreshHits = parentAccess ? function(key, config, state){
-  (config.refreshRate || 0) > 0 && setInterval(function(){
+function refreshHits(key, config, state){
+  (config.refreshRate || 0) > 0 && parentAccess && setInterval(function(){
     detectHits(key, config, state);
   }, config.refreshRate * 1000);
-} : function(){};
+}
 
 function createModel(){
   return {refresh, cycle};
