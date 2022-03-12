@@ -1,5 +1,38 @@
 const config = {
   buttons: {
+    futures: {
+      refreshRate: 5,
+      hits: ["text-decoration: underline;", ""],
+      styles: [{
+        char: "\\eb3e",
+        query: `[:find (pull ?block [*])
+          :in $ ?start ?end
+          :where
+          (or
+            [?block :block/scheduled ?d]
+            [?block :block/deadline ?d])
+          [(> ?d ?start)]
+          [(< ?d ?end)]]`,
+        inputs: ["today 1", "today 30"],
+        selector: "div[blockid=\"$uuid\"]",
+        matches: /./,
+        style: `{display: none;}`
+      },{
+        char: "\\eb3f",
+        query: `[:find (pull ?block [*])
+          :in $ ?start ?end
+          :where
+          (or
+            [?block :block/scheduled ?d]
+            [?block :block/deadline ?d])
+          [(> ?d ?start)]
+          [(< ?d ?end)]]`,
+        inputs: ["today 1", "today 30"],
+        selector: "div#main-content-container:hover div[blockid=\"$uuid\"]",
+        matches: /./,
+        style: `{text-decoration: underline wavy;}`
+      }]
+    },
     todos: {
       refreshRate: 5,
       hits: ["text-decoration: underline;", ""],
@@ -18,16 +51,48 @@ const config = {
 
 const state = {};
 
-function cycle(el) {
+function today(os){
+  const offset = os ? parseInt(os) : 0;
+  const dt = new Date();
+  const date = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + offset, 0, 0, 0);
+  return parseInt(date.getFullYear().toString() + (date.getMonth() + 1).toString().padStart(2, "0") + date.getDate().toString().padStart(2, "0"));
+}
+
+const fns = {
+  today: today
+}
+
+async function cycle(el) {
   const key = el.dataset.key,
         st  = state[key],
         cfg = config.buttons[key];
   st.idx = cfg.styles[st.idx + 1] ? st.idx + 1 : 0;
-  refresh(key, cfg, st);
+  await refresh(key, cfg, st);
 }
 
-function refresh(key, config, state){
-  const {char, style, hits} = config.styles[state.idx];
+function expandInput(input){
+  const [named, ...args] = input.split(" ");
+  const fn = fns[named];
+  return fn ? fn.apply(null, args) : input;
+}
+
+async function findIds({query, inputs, selector, matches, style}){
+  const results = (await logseq.DB.datascriptQuery.apply(logseq.DB, [query].concat(inputs.map(expandInput))) || []).flat();
+  const hits = results.filter(function(block){
+    return !!matches && matches.test(block.content);
+  }).map(function(block){
+    return block.uuid.$uuid$;
+  }).map(function(uuid){
+    return selector.replace(/\$uuid/g, uuid);
+  }).join(", ");
+  return {hits, style: hits + " " + style};
+}
+
+async function refresh(key, config, state){
+  const current = config.styles[state.idx];
+  const {query} = current;
+  const {char, style, hits, inputs, selector, matches} = Object.assign(current, query ? await findIds(current) : null);
+
   state.hits = hits;
   logseq.App.registerUIItem('toolbar', {
     key: `button-${key}`,
@@ -70,7 +135,7 @@ function createModel(){
   return {refresh, cycle};
 }
 
-function main(){
+async function main(){
   Object.assign(config, logseq.settings);
 
   logseq.provideStyle({
@@ -90,7 +155,7 @@ function main(){
   for (let key in config.buttons) {
     const btn = config.buttons[key],
           st  = state[key] = {idx: 0};
-    refresh(key, btn, st);
+    await refresh(key, btn, st);
     refreshHits(key, btn, st);
   }
 }
