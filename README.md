@@ -47,6 +47,7 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
 {
   "buttons": {
     "todos": {
+      "desc": "Toggles the visibility of closed tasks",
       "refreshRate": 5,
       "hits": ["text-decoration: underline;", ""],
       "styles": [{
@@ -62,6 +63,7 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
       }]
     },
     "futures": {
+      "desc": "Toggles the visibility of future tasks",
       "refreshRate": 5,
       "hits": ["text-decoration: underline;", ""],
       "styles": [{
@@ -84,6 +86,7 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
       }]
     },
     "props": {
+      "desc": "Toggles the visibility of page properties",
       "refreshRate": 5,
       "hits": ["text-decoration: underline;", ""],
       "styles": [{
@@ -96,6 +99,17 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
         "char": "\\eeb0",
         "hits": ".pre-block",
         "style": "div#main-content-container:hover .pre-block {text-decoration: underline wavy;}"
+      }]
+    },
+    "boardgames": {
+      "desc": "Indicates a favorite pastime appears on the page.",
+      "refreshRate": 5,
+      "hits": ["text-decoration: underline;", ""],
+      "styles": [{
+        "tooltip": "Boardgames!",
+        "char": "\\eb66",
+        "hits": "div#main-content-container div[data-refs-self*='\"boardgame\"'], div#main-content-container div[data-refs-self*='\"boardgames\"']",
+        "style": "div#main-content-container:hover div[data-refs-self*='\"boardgame\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"boardgames\"'] span.inline {background-color: lightyellow;}"
       }]
     }
   }
