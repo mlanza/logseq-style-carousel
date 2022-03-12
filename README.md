@@ -104,7 +104,7 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
 
 Unless there are at least 2 styles per button there is no toggle/cycle effect.  It would not be situationally unreasonable to have 3 or more styles.
 
-Use Character Map (a tool on Windows) to look up the codes associated with the [tabler-icons font](https://tablericons.com) in order to select icons for your custom buttons.
+Use Character Map (a tool on Windows) to look up the codes associated with the [tabler-icons font](https://tablericons.com) ([download here](https://github.com/tabler/tabler-icons/tree/master/iconfont/fonts)) in order to select icons for your custom buttons.
 
 ## Queries
 
