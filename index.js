@@ -28,6 +28,7 @@ try {
   top.document.querySelector("body");
 } catch {
   parentAccess = false;
+  console.log("consider installing Style Carousel from local package");
 }
 
 async function getPage(){
@@ -132,7 +133,7 @@ async function refresh(key, config, state){
   detectHits(key, config, state);
 }
 
-function detectHits(key, config, state){
+const detectHits = parentAccess ? function(key, config, state){
   if (state.hits) {
     const el = top.document.querySelector(state.hits);
     const style = el ? config.hits[0] : config.hits[1];
@@ -144,9 +145,9 @@ function detectHits(key, config, state){
       }`
     });
   }
-}
+} : function(){};
 
-const refreshHits =  parentAccess ? function(key, config, state){
+const refreshHits = parentAccess ? function(key, config, state){
   (config.refreshRate || 0) > 0 && setInterval(function(){
     detectHits(key, config, state);
   }, config.refreshRate * 1000);
