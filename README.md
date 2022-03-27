@@ -12,8 +12,6 @@ The below sample settings demonstrates two additional options:
 * Toggling the visibility of future tasks
 * Toggling the visibility of page properties
 
-**The `hits` feature will not work when installed from the marketplace due to [cross-origin iframe issues](https://discuss.logseq.com/t/need-help-resolving-a-plugin-issue-regarding-cross-frame-origin/5750) caused by the call to `top.document` in [index.js](index.js).  You can either accept this deficit or to regain the feature, [install the plugin locally](#manual-installation).**
-
 ## Basic Button Settings
 
 Basic buttons are based purely on page content.  They are unaided by queries.
