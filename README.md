@@ -1,6 +1,6 @@
 # Logseq Style Carousel Plugin
 
-This plugin provide buttons for cycling through styles often to affect what is hidden or shown.  By default it is preconfigured with a button that:
+This plugin provides buttons for cycling through styles often to affect what is hidden or shown.  By default it is preconfigured with a button that:
 
 **Toggles the visibility of completed and canceled to-dos.**
 
