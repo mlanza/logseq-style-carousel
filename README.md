@@ -67,16 +67,16 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
       "styles": [{
         "tooltip": "Without future tasks",
         "char": "\\eb3e",
-        "query": "[:find (pull ?block [*]) :in $ ?start ?end :where (or [?block :block/scheduled ?d] [?block :block/deadline ?d]) [(> ?d ?start)] [(< ?d ?end)]]",
-        "inputs": ["today 1", "today 10000"],
+        "query": "[:find (pull ?block [*]) :in $ ?start :where (or [?block :block/scheduled ?d] [?block :block/deadline ?d]) [(> ?d ?start)]]",
+        "inputs": ["today 0"],
         "matches": [],
         "hit": "div[blockid=\"@uuid\"]",
         "rules": "{display: none;}"
       }, {
         "tooltip": "With future tasks",
         "char": "\\eb3f",
-        "query": "[:find (pull ?block [*]) :in $ ?start ?end :where (or [?block :block/scheduled ?d] [?block :block/deadline ?d]) [(> ?d ?start)] [(< ?d ?end)]]",
-        "inputs": ["today 1", "today 10000"],
+        "query": "[:find (pull ?block [*]) :in $ ?start :where (or [?block :block/scheduled ?d] [?block :block/deadline ?d]) [(> ?d ?start)]]",
+        "inputs": ["today 0"],
         "matches": [],
         "hit": "div[blockid=\"@uuid\"]",
         "selector": "div#main-content-container:hover div[blockid=\"@uuid\"]",
