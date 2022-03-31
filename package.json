@@ -3,7 +3,7 @@
   "version": "1.1.3",
   "author": "Mario T. Lanza",
   "main": "index.html",
-  "description": "Toggle visibility of completed and canceled to-dos.  Buttons may be added/reconfigured for any imaginable style effects.",
+  "description": "Add button(s) configured for stylesheet-driven effects such as toggling the visibility of completed to-dos.",
   "license": "MIT",
   "browserslist": [
     "chrome 80"
