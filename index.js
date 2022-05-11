@@ -78,6 +78,10 @@ const fns = {
   today: today
 }
 
+function present(obj){
+  return !!obj;
+}
+
 function expandInput(input){
   const [named, ...args] = input.split(" ");
   const fn = fns[named];
@@ -104,11 +108,16 @@ async function cycle(el) {
 }
 
 async function findIds({query, inputs, matches, hit, selector, rules}){
-  const results = (await logseq.DB.datascriptQuery.apply(logseq.DB, [query].concat(inputs.map(expandInput))) || []).flat();
+  let q = query, ins = inputs.map(expandInput);
+  for(let i in ins){
+    q = q.replace(new RegExp(`\\{${i}\\}`, "gi"), ins[i]);
+  }
+  const queried = await logseq.DB.datascriptQuery(q);
+  const results = (queried || []).flat().filter(present);
   const patterns = (matches || []).map(expandInput).map(function(pattern){
     return new RegExp(pattern);
   });
-  const uuids = results.filter(match(patterns)).map(function(block){
+  const uuids = results.filter(match(patterns)).filter(present).map(function(block){
     return block.uuid.$uuid$;
   });
   const hits = uuids.map(function(uuid){
@@ -173,15 +182,21 @@ async function main(){
   });
 
   for (let key in config.buttons) {
-    const {char, tooltip} = config.buttons[key].styles[0];
-    setButton(key, char, tooltip);
+    const btn = config.buttons[key];
+    if (btn.disabled) {
+      delete config.buttons[key];
+    } else {
+      const {char, tooltip} = btn.styles[0];
+      state[key] = {idx: 0};
+      setButton(key, char, tooltip);
+    }
   }
 
   await getPage();
 
   for (let key in config.buttons) {
     const btn = config.buttons[key],
-          st  = state[key] = {idx: 0};
+          st  = state[key];
     await refresh(key, btn, st);
     refreshHits(key, btn, st);
   }
