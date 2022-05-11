@@ -1,6 +1,6 @@
 {
   "name": "logseq-style-carousel",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": "Mario T. Lanza",
   "main": "index.html",
   "description": "Add button(s) configured for stylesheet-driven effects such as toggling the visibility of completed to-dos.",
