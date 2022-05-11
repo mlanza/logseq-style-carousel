@@ -10,38 +10,47 @@ Toggling is controlled by the eye button appearing in the toolbar.  If any match
 
 The sample settings json below demonstrates additional options.  See the `desc` of each entry.
 
-## Basic Button Settings
+## Button Settings
 
-Basic buttons are based purely on page content.  They are unaided by queries.
+Buttons are based on page content.
 
 Define one or more `buttons` with the following properties:
 * `hits` — An array of two strings, the first is the button style when there are hits, the second when there are no hits.
 * `styles` — An array of style objects which are cycled through when the associated button is clicked
 * `refreshRate` — How often in seconds to check for matching content on the current page?
 
-Define two or more styles per `button` with the following properties:
+Define one or more (one is unusual) styles per `button` with the following properties:
 * `tooltip` — Text description of the button's the current effect.
 * `char` — A character code (maps to an icon in Logseq's built-in tabler-icons) to represent the button when this style is active.
 * `style` — Selector and styling rules or @import rule.
 * `hits` — CSS selector for determining if hits exist on the page.
 
-## Advanced Button Settings
+## Query Settings
 
-Advanced buttons are aided by queries and several additional attributes.  Queries are used to find and filter matching blocks.  The uuids of these blocks are used for generating selectors and applying style rules.
+Define queries to select matching blocks and dynamically mark the their DOM elements with class names.  Your custom stylesheet can use these.
 
-Define two or more styles per `button` with the following properties:
-* `query` — Datalog query which returns blocks.
+* `query` — Datalog query which returns blocks.  Inputs are noted with positional placeholders such as `{0}` or `{1}`.
 * `inputs` — Optional query input(s).
-* `matches` — Optional regular expression(s) expressed as strings for filtering blocks by their content text.
-* `hit` — Hit template with a "@uuid" (to be replaced) used, in aggregate, to generate a selector targeting matching blocks.  Used to detect hits on the current page.
-* `selector` — Optional template with a "@uuid" (to be replaced) for generating a selector targeting matching blocks.  Use only if you want to style elements which vary, perhaps slightly, from those considered hits.
-* `rules` — The CSS rules to apply against target elements.  The `style` for basic buttons is directly provided.  The `style` for advanced buttons is derived from the aggregate `selector` and the `rules`.
+* `matches` — Optional regular expression(s) expressed as strings for further filtering blocks by their content text.
+* `classname` — Class name to apply to matching block elements found in the DOM.
 
-Both basic and advanced buttons are demonstrated in this plugin settings example:
+Both buttons and queries are demonstrated in this plugin settings example:
 
 ```json
 {
   "disabled": false,
+  "queries": [
+    {
+      "query": "[:find (pull ?block [*]) :where (?block :block/scheduled ?d) [(> ?d {0})]]",
+      "inputs": [
+        "today 0"
+      ],
+      "classname": "future-task",
+      "matches": [],
+      "disabled": false,
+      "refreshRate": 30
+    }
+  ],
   "buttons": {
     "todos": {
       "desc": "Toggles the visibility of closed tasks",
@@ -78,25 +87,14 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
         {
           "tooltip": "Without future tasks",
           "char": "\\eb3e",
-          "query": "[:find (pull ?block [*]) :where (?block :block/scheduled ?d) [(> ?d {0})]]",
-          "inputs": [
-            "today 0"
-          ],
-          "matches": [],
-          "hit": "div[blockid=\"@uuid\"]",
-          "rules": "{display: none;}"
+          "hits": ".future-task",
+          "style": ".future-task {display: none;}"
         },
         {
           "tooltip": "With future tasks",
           "char": "\\eb3f",
-          "query": "[:find (pull ?block [*]) :where (?block :block/scheduled ?d) [(> ?d {0})]]",
-          "inputs": [
-            "today 0"
-          ],
-          "matches": [],
-          "hit": "div[blockid=\"@uuid\"]",
-          "selector": "div#main-content-container:hover div[blockid=\"@uuid\"]",
-          "rules": "{text-decoration: underline wavy;}"
+          "hits": ".future-task",
+          "style": ".future-task {text-decoration: underline wavy;}"
         }
       ]
     },

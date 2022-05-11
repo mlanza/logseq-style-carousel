@@ -20,17 +20,6 @@ const config = {
 
 const state = {};
 
-//must install as local package...
-let parentAccess = true;
-
-try {
-  //...not possible if installed from marketplace.
-  top.document.querySelector("body");
-} catch {
-  parentAccess = false;
-  console.log("consider installing Style Carousel from local package");
-}
-
 async function getPage(){
   let tries = 30;
   return new Promise(function(resolve, reject){
@@ -107,7 +96,8 @@ async function cycle(el) {
   await refresh(key, btn, st);
 }
 
-async function findIds({query, inputs, matches, hit, selector, rules}){
+async function findIds(qu){
+  const {query, inputs, matches} = qu;
   let q = query, ins = inputs.map(expandInput);
   for(let i in ins){
     q = q.replace(new RegExp(`\\{${i}\\}`, "gi"), ins[i]);
@@ -117,34 +107,50 @@ async function findIds({query, inputs, matches, hit, selector, rules}){
   const patterns = (matches || []).map(expandInput).map(function(pattern){
     return new RegExp(pattern);
   });
-  const uuids = results.filter(match(patterns)).filter(present).map(function(block){
+  qu.uuids = results.filter(match(patterns)).filter(present).map(function(block){
     return block.uuid.$uuid$;
   });
-  const hits = uuids.map(function(uuid){
-    return hit.replace(/\@uuid/g, uuid);
-  }).join(", ");
-  const style = uuids.map(function(uuid){
-    return (selector || hit).replace(/\@uuid/g, uuid);
-  }).join(", ") + " " + rules;
-  return {hits, style};
+  classify(qu);
 }
 
-async function refresh(key, config, state){
-  const status = config.styles[state.idx];
-  const {query} = status;
-  const {char, tooltip, style, hits} = Object.assign(status, query ? await findIds(status) : null);
+function refreshClasses(q){
+  q.disabled !== true && (q.refreshRate || 0) > 0 && setInterval(findIds.bind(q, q), q.refreshRate * 1000);
+}
+
+function classify({uuids, classname}){
+  if (!uuids) {
+    return;
+  }
+  const hits = uuids.map(function(uuid){
+    return "div[blockid=\"@uuid\"]".replace(/\@uuid/g, uuid);
+  }).join(", ");
+  const prior = top.document.querySelectorAll(`.${classname}`);
+  const els = Array.from(top.document.querySelectorAll(hits));
+  for(let el of prior){
+    if (!els.includes(el)) {
+      el.classList.remove(classname);
+    }
+  }
+  for(let el of els){
+    el.classList.add(classname);
+  }
+}
+
+async function refresh(key, btn, state){
+  const {char, tooltip, style, hits} = btn.styles[state.idx];
   state.hits = hits;
   logseq.provideStyle({
     key: `active-${key}`,
     style
   });
+  config.queries.forEach(classify);
   setButton(key, char, tooltip || "");
-  detectHits(key, config, state);
+  detectHits(key, btn, state);
 }
 
 function detectHits(key, config, state){
   if (state.hits) {
-    const el = parentAccess ? top.document.querySelector(state.hits) : null;
+    const el = top.document.querySelector(state.hits);
     const style = el ? config.hits[0] : config.hits[1];
     logseq.provideStyle({
       key: `hits-${key}`,
@@ -157,7 +163,7 @@ function detectHits(key, config, state){
 }
 
 function refreshHits(key, config, state){
-  (config.refreshRate || 0) > 0 && parentAccess && setInterval(function(){
+  (config.refreshRate || 0) > 0 && setInterval(function(){
     detectHits(key, config, state);
   }, config.refreshRate * 1000);
 }
@@ -192,6 +198,7 @@ async function main(){
     }
   }
 
+  config.queries.forEach(refreshClasses);
   await getPage();
 
   for (let key in config.buttons) {
