@@ -41,72 +41,104 @@ Both basic and advanced buttons are demonstrated in this plugin settings example
 
 ```json
 {
+  "disabled": false,
   "buttons": {
     "todos": {
       "desc": "Toggles the visibility of closed tasks",
+      "disabled": false,
       "refreshRate": 5,
-      "hits": ["text-decoration: underline;", ""],
-      "styles": [{
-        "tooltip": "Without closed tasks",
-        "char": "\\ecf0",
-        "hits": "div#main-content-container div[data-refs-self*='\"done\"'], div#main-content-container div[data-refs-self*='\"canceled\"']",
-        "style": "div[data-refs-self*='\"done\"']:not(:focus-within), div[data-refs-self*='\"canceled\"']:not(:focus-within) {display: none;}"
-      },{
-        "tooltip": "With closed tasks",
-        "char": "\\ea9a",
-        "hits": "div#main-content-container div[data-refs-self*='\"done\"'], div#main-content-container div[data-refs-self*='\"canceled\"']",
-        "style": "div#main-content-container:hover div[data-refs-self*='\"done\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"canceled\"'] span.inline {text-decoration: underline wavy;}"
-      }]
+      "hits": [
+        "text-decoration: underline;",
+        ""
+      ],
+      "styles": [
+        {
+          "tooltip": "Without closed tasks",
+          "char": "\\ecf0",
+          "hits": "div#main-content-container div[data-refs-self*='\"done\"'], div#main-content-container div[data-refs-self*='\"canceled\"'], div#main-content-container div[data-refs-self*='\"waiting\"']",
+          "style": "div[data-refs-self*='\"done\"']:not(:focus-within), div[data-refs-self*='\"canceled\"']:not(:focus-within), div[data-refs-self*='\"waiting\"']:not(:focus-within) {display: none;}"
+        },
+        {
+          "tooltip": "With closed tasks",
+          "char": "\\ea9a",
+          "hits": "div#main-content-container div[data-refs-self*='\"done\"'], div#main-content-container div[data-refs-self*='\"canceled\"'], div#main-content-container div[data-refs-self*='\"waiting\"']",
+          "style": "div#main-content-container:hover div[data-refs-self*='\"done\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"canceled\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"waiting\"'] span.inline {text-decoration: underline wavy;}"
+        }
+      ]
     },
     "futures": {
       "desc": "Toggles the visibility of future tasks",
+      "disabled": false,
       "refreshRate": 5,
-      "hits": ["text-decoration: underline;", ""],
-      "styles": [{
-        "tooltip": "Without future tasks",
-        "char": "\\eb3e",
-        "query": "[:find (pull ?block [*]) :in $ ?start :where (or [?block :block/scheduled ?d] [?block :block/deadline ?d]) [(> ?d ?start)]]",
-        "inputs": ["today 0"],
-        "matches": [],
-        "hit": "div[blockid=\"@uuid\"]",
-        "rules": "{display: none;}"
-      }, {
-        "tooltip": "With future tasks",
-        "char": "\\eb3f",
-        "query": "[:find (pull ?block [*]) :in $ ?start :where (or [?block :block/scheduled ?d] [?block :block/deadline ?d]) [(> ?d ?start)]]",
-        "inputs": ["today 0"],
-        "matches": [],
-        "hit": "div[blockid=\"@uuid\"]",
-        "selector": "div#main-content-container:hover div[blockid=\"@uuid\"]",
-        "rules": "{text-decoration: underline wavy;}"
-      }]
+      "hits": [
+        "text-decoration: underline;",
+        ""
+      ],
+      "styles": [
+        {
+          "tooltip": "Without future tasks",
+          "char": "\\eb3e",
+          "query": "[:find (pull ?block [*]) :where (?block :block/scheduled ?d) [(> ?d {0})]]",
+          "inputs": [
+            "today 0"
+          ],
+          "matches": [],
+          "hit": "div[blockid=\"@uuid\"]",
+          "rules": "{display: none;}"
+        },
+        {
+          "tooltip": "With future tasks",
+          "char": "\\eb3f",
+          "query": "[:find (pull ?block [*]) :where (?block :block/scheduled ?d) [(> ?d {0})]]",
+          "inputs": [
+            "today 0"
+          ],
+          "matches": [],
+          "hit": "div[blockid=\"@uuid\"]",
+          "selector": "div#main-content-container:hover div[blockid=\"@uuid\"]",
+          "rules": "{text-decoration: underline wavy;}"
+        }
+      ]
     },
     "props": {
       "desc": "Toggles the visibility of page properties",
+      "disabled": false,
       "refreshRate": 5,
-      "hits": ["text-decoration: underline;", ""],
-      "styles": [{
-        "tooltip": "Without page properties",
-        "char": "\\eeaf",
-        "hits": ".pre-block",
-        "style": ".pre-block {display: none}"
-      },{
-        "tooltip": "With page properties",
-        "char": "\\eeb0",
-        "hits": ".pre-block",
-        "style": "div#main-content-container:hover .pre-block {text-decoration: underline wavy;}"
-      }]
+      "hits": [
+        "text-decoration: underline;",
+        ""
+      ],
+      "styles": [
+        {
+          "tooltip": "Without page properties",
+          "char": "\\eeaf",
+          "hits": ".pre-block",
+          "style": ".pre-block {display: none}"
+        },
+        {
+          "tooltip": "With page properties",
+          "char": "\\eeb0",
+          "hits": ".pre-block",
+          "style": "div#main-content-container:hover .pre-block {text-decoration: underline wavy;}"
+        }
+      ]
     },
     "boardgames": {
       "desc": "Indicates a favorite pastime appears on the page.",
+      "disabled": false,
       "refreshRate": 5,
-      "hits": ["text-decoration: underline;", ""],
-      "styles": [{
-        "tooltip": "Boardgames!",
-        "char": "\\eb66",
-        "hits": "div#main-content-container div[data-refs-self*='\"boardgame\"'], div#main-content-container div[data-refs-self*='\"boardgames\"']",
-        "style": "div#main-content-container:hover div[data-refs-self*='\"boardgame\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"boardgames\"'] span.inline {background-color: lightyellow;}"
-      }]
+      "hits": [
+        "text-decoration: underline;",
+        ""
+      ],
+      "styles": [
+        {
+          "tooltip": "Boardgames!",
+          "char": "\\eb66",
+          "hits": "div#main-content-container div[data-refs-self*='\"boardgame\"'], div#main-content-container div[data-refs-self*='\"boardgames\"']",
+          "style": "div#main-content-container:hover div[data-refs-self*='\"boardgame\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"boardgames\"'] span.inline {background-color: lightyellow;}"
+        }
+      ]
     }
   }
 }
