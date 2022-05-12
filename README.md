@@ -54,7 +54,7 @@ The following settings are an example of how to define buttons:
         }
       ]
     },
-    "futures": { // requires Classy plugin
+    "futures": {
       "desc": "Toggles the visibility of future tasks",
       "disabled": false,
       "refreshRate": 5,
@@ -125,13 +125,7 @@ Unless there are at least 2 styles per button there is no toggle/cycle effect.  
 
 Use Character Map (a tool on Windows) to look up the codes associated with the [tabler-icons font](https://tablericons.com) ([download here](https://github.com/tabler/tabler-icons/tree/master/iconfont/fonts)) in order to select icons for your custom buttons.
 
-## Manual installation
-* Download this repo
-* In Logseq:
-  * Ensure Developer Mode is on
-  * Open Plugins
-  * Select `Load unpacked plugin`
+The `futures` button relies on classes made possible by the [Classy plugin](https://github.com/mlanza/logseq-classy).
 
 ## License
 [MIT](./LICENSE.md)
-
