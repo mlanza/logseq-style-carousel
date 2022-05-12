@@ -10,7 +10,7 @@ Toggling is controlled by the eye button appearing in the toolbar.  If any match
 
 The sample settings json below demonstrates additional options.  See the `desc` of each entry.
 
-## Button Settings
+## Settings
 
 Buttons are based on page content.
 
@@ -25,32 +25,11 @@ Define one or more (one is unusual, two typical) styles per `button` with the fo
 * `style` — Selector and styling rules or @import rule.
 * `hits` — CSS selector for determining if hits exist on the page.
 
-## Query Settings
-
-The queries settings can be use to complement toggle buttons or independently to facilitate custom stylesheet effects impossible without Style Carousel.  Matching blocks are dynamically marked with class names in the DOM.
-
-* `query` — Datalog query which returns blocks.  Inputs are noted with positional placeholders such as `{0}` or `{1}`.
-* `inputs` — Optional query input(s).
-* `matches` — Optional regular expression(s) expressed as strings for further filtering blocks by their content text.
-* `classname` — Class name to apply to matching block elements found in the DOM.
-
-Both buttons and queries are demonstrated in this plugin settings example:
+The following settings are an example of how to define buttons:
 
 ```json
 {
   "disabled": false,
-  "queries": [
-    {
-      "query": "[:find (pull ?block [*]) :where (?block :block/scheduled ?d) [(> ?d {0})]]",
-      "inputs": [
-        "today 0"
-      ],
-      "classname": "future-task",
-      "matches": [],
-      "disabled": false,
-      "refreshRate": 30
-    }
-  ],
   "buttons": {
     "todos": {
       "desc": "Toggles the visibility of closed tasks",
@@ -75,7 +54,7 @@ Both buttons and queries are demonstrated in this plugin settings example:
         }
       ]
     },
-    "futures": {
+    "futures": { // requires Classy plugin
       "desc": "Toggles the visibility of future tasks",
       "disabled": false,
       "refreshRate": 5,
@@ -145,16 +124,6 @@ Both buttons and queries are demonstrated in this plugin settings example:
 Unless there are at least 2 styles per button there is no toggle/cycle effect.  It would not be situationally unreasonable to have 3 or more styles.
 
 Use Character Map (a tool on Windows) to look up the codes associated with the [tabler-icons font](https://tablericons.com) ([download here](https://github.com/tabler/tabler-icons/tree/master/iconfont/fonts)) in order to select icons for your custom buttons.
-
-## Queries
-
-Queries are refreshed periodically even as one navigates between pages.  The queries are global and do not target the current page.  The resulting style rules, even if larger in scope than the current page, are adequate for application against the current page.  A query that targets too many blocks may add substantial overhead to advanced buttons.  Mind your refresh rates the larger the potential result set.
-
-### Calculations
-
-Logseq can itself calculate relative values but [it does not expose them in a manner plugins can utilize](https://discuss.logseq.com/t/support-relative-values-e-g-resolve-input-in-plugin-queries/6010).  This plugin, therefore, currently only implements one calculation: `today`.  It accepts a single argument, an offset from today.  Thus, 0 is today, -1 yesterday, 1 tomorrow, etc.  More calculations can be added as needs arise.
-
-Calculations (like Logseq's `resolve-input`) target both query `inputs` and regex `matches`.  However, there are currently no calculations suitable for generating regular expressions (that is, `matches` use).  Those too can be added as needs arise.
 
 ## Manual installation
 * Download this repo
