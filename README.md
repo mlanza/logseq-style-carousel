@@ -19,7 +19,7 @@ Define one or more `buttons` with the following properties:
 * `styles` — An array of style objects which are cycled through when the associated button is clicked
 * `refreshRate` — How often in seconds to check for matching content on the current page?
 
-Define one or more (one is unusual) styles per `button` with the following properties:
+Define one or more (one is unusual, two typical) styles per `button` with the following properties:
 * `tooltip` — Text description of the button's the current effect.
 * `char` — A character code (maps to an icon in Logseq's built-in tabler-icons) to represent the button when this style is active.
 * `style` — Selector and styling rules or @import rule.
@@ -27,7 +27,7 @@ Define one or more (one is unusual) styles per `button` with the following prope
 
 ## Query Settings
 
-Define queries to select matching blocks and dynamically mark the their DOM elements with class names.  Your custom stylesheet can use these.
+The queries settings can be use to complement toggle buttons or independently to facilitate custom stylesheet effects impossible without Style Carousel.  Matching blocks are dynamically marked with class names in the DOM.
 
 * `query` — Datalog query which returns blocks.  Inputs are noted with positional placeholders such as `{0}` or `{1}`.
 * `inputs` — Optional query input(s).
