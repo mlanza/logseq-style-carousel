@@ -66,14 +66,14 @@ The following settings are an example of how to define buttons:
         {
           "tooltip": "Without future tasks",
           "char": "\\eb3e",
-          "hits": ".future-task",
-          "style": ".future-task {display: none;}"
+          "hits": ".future",
+          "style": ".future {display: none;}"
         },
         {
           "tooltip": "With future tasks",
           "char": "\\eb3f",
-          "hits": ".future-task",
-          "style": ".future-task {text-decoration: underline wavy;}"
+          "hits": ".future",
+          "style": ".future {text-decoration: underline wavy;}"
         }
       ]
     },
@@ -121,7 +121,7 @@ The following settings are an example of how to define buttons:
 }
 ```
 
-Unless there are at least 2 styles per button there is no toggle/cycle effect.  It would not be situationally unreasonable to have 3 or more styles.
+Unless there are at least 2 styles per button there is no toggle/cycle effect.  It would not be situationally unreasonable to have 3 or more styles.  Change the default style for any button by reordering the `styles` array.
 
 Use Character Map (a tool on Windows) to look up the codes associated with the [tabler-icons font](https://tablericons.com) ([download here](https://github.com/tabler/tabler-icons/tree/master/iconfont/fonts)) in order to select icons for your custom buttons.
 
