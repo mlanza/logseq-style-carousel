@@ -137,14 +137,14 @@ The `futures` button relies on classes made possible by the [Classy plugin](http
 
 ### Statuses
 
-Each button has a set of statuses.  Take the `todos` button.  Style Carousel will automatically add a `[data-sc-todos]` attribute to the body element.  It's status will be whatever the current button state indicates:
+Each button has a set of statuses.  Take the `todos` button.  Style Carousel will automatically add a `[data-sc-todos]` attribute to the body element.  The attribute will reflect the current button status and cycle through them as the button is clicked:
 
-* \[data-sc-todos="without-closed"\]
-* \[data-sc-todos="with-closed"\]
+* `\[data-sc-todos="without-closed"\]`
+* `\[data-sc-todos="with-closed"\]`
 
 This feature was added later to permit stylesheet effects to be wholly included in the `custom.css`.  This deprecates the `style` setting.  It is still supported, but using the stylesheet rules directly is preferred.
 
-So, for example, your custom stylesheet can be updated to include the following.  The `style` attribute would not be needed.
+So, for example, your custom stylesheet can be updated to include the following and the `style` attribute could be removed from your settings:
 
 ```css
 [data-sc-todos="without-closed"] div[data-refs-self*='\"done\"']:not(:focus-within),
@@ -159,7 +159,7 @@ So, for example, your custom stylesheet can be updated to include the following.
 }
 ```
 
-To be clear, while the `style` and `status` settings are compatible, they're intended to be mutually exclusive, for one or the other to be used.  And between the two options, using `status` with your `custom.css` is preferred.  The above json, because it includes `status` settings, should drop the use of the `style` settings and stylesheet rules should be transferred to the custom stylesheet.
+While the `style` and `status` settings are compatible, they're intended to be mutually exclusive, for one or the other to be used.  And between the two options, using `status` with your `custom.css` is preferred.  The above json, because it includes `status` settings, should drop the use of the `style` settings and stylesheet rules should be transferred to the custom stylesheet.
 
 ## License
 [MIT](./LICENSE.md)
