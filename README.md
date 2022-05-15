@@ -139,8 +139,8 @@ The `futures` button relies on classes made possible by the [Classy plugin](http
 
 Each button has a set of statuses.  Take the `todos` button.  Style Carousel will automatically add a `[data-sc-todos]` attribute to the body element.  The attribute will reflect the current button status and cycle through them as the button is clicked:
 
-* `\[data-sc-todos="without-closed"\]`
-* `\[data-sc-todos="with-closed"\]`
+* \[data-sc-todos="without-closed"\]
+* \[data-sc-todos="with-closed"\]
 
 This feature was added later to permit stylesheet effects to be wholly included in the `custom.css`.  This deprecates the `style` setting.  It is still supported, but using the stylesheet rules directly is preferred.
 
