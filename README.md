@@ -22,6 +22,7 @@ Define one or more `buttons` with the following properties:
 Define one or more (one is unusual, two typical) styles per `button` with the following properties:
 * `tooltip` — Text description of the button's the current effect.
 * `char` — A character code (maps to an icon in Logseq's built-in tabler-icons) to represent the button when this style is active.
+* `status` — A machine-friendly name for the current status.  As one cycles through statuses this status will be etched into the `body` element.
 * `style` — Selector and styling rules or @import rule.
 * `hits` — CSS selector for determining if hits exist on the page.
 
@@ -43,12 +44,14 @@ The following settings are an example of how to define buttons:
         {
           "tooltip": "Without closed tasks",
           "char": "\\ecf0",
+          "status": "without-closed",
           "hits": "div#main-content-container div[data-refs-self*='\"done\"'], div#main-content-container div[data-refs-self*='\"canceled\"'], div#main-content-container div[data-refs-self*='\"waiting\"']",
           "style": "div[data-refs-self*='\"done\"']:not(:focus-within), div[data-refs-self*='\"canceled\"']:not(:focus-within), div[data-refs-self*='\"waiting\"']:not(:focus-within) {display: none;}"
         },
         {
           "tooltip": "With closed tasks",
           "char": "\\ea9a",
+          "status": "with-closed",
           "hits": "div#main-content-container div[data-refs-self*='\"done\"'], div#main-content-container div[data-refs-self*='\"canceled\"'], div#main-content-container div[data-refs-self*='\"waiting\"']",
           "style": "div#main-content-container:hover div[data-refs-self*='\"done\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"canceled\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"waiting\"'] span.inline {text-decoration: underline wavy;}"
         }
@@ -66,12 +69,14 @@ The following settings are an example of how to define buttons:
         {
           "tooltip": "Without future tasks",
           "char": "\\eb3e",
+          "status": "without-future",
           "hits": ".future",
           "style": ".future {display: none;}"
         },
         {
           "tooltip": "With future tasks",
           "char": "\\eb3f",
+          "status": "with-future",
           "hits": ".future",
           "style": ".future {text-decoration: underline wavy;}"
         }
@@ -89,12 +94,14 @@ The following settings are an example of how to define buttons:
         {
           "tooltip": "Without page properties",
           "char": "\\eeaf",
+          "status": "without-props",
           "hits": ".pre-block",
           "style": ".pre-block {display: none}"
         },
         {
           "tooltip": "With page properties",
           "char": "\\eeb0",
+          "status": "with-props",
           "hits": ".pre-block",
           "style": "div#main-content-container:hover .pre-block {text-decoration: underline wavy;}"
         }
@@ -112,6 +119,7 @@ The following settings are an example of how to define buttons:
         {
           "tooltip": "Boardgames!",
           "char": "\\eb66",
+          "status": "boardgames",
           "hits": "div#main-content-container div[data-refs-self*='\"boardgame\"'], div#main-content-container div[data-refs-self*='\"boardgames\"']",
           "style": "div#main-content-container:hover div[data-refs-self*='\"boardgame\"'] span.inline, div#main-content-container:hover div[data-refs-self*='\"boardgames\"'] span.inline {background-color: lightyellow;}"
         }
@@ -126,6 +134,32 @@ Unless there are at least 2 styles per button there is no toggle/cycle effect.  
 Use Character Map (a tool on Windows) to look up the codes associated with the [tabler-icons font](https://tablericons.com) ([download here](https://github.com/tabler/tabler-icons/tree/master/iconfont/fonts)) in order to select icons for your custom buttons.
 
 The `futures` button relies on classes made possible by the [Classy plugin](https://github.com/mlanza/logseq-classy).
+
+### Statuses
+
+Each button has a set of statuses.  Take the `todos` button.  Style Carousel will automatically add a `[data-sc-todos]` attribute to the body element.  It's status will be whatever the current button state indicates:
+
+* \[data-sc-todos="without-closed"\]
+* \[data-sc-todos="with-closed"\]
+
+This feature was added later to permit stylesheet effects to be wholly included in the `custom.css`.  This deprecates the `style` setting.  It is still supported, but using the stylesheet rules directly is preferred.
+
+So, for example, your custom stylesheet can be updated to include the following.  The `style` attribute would not be needed.
+
+```css
+[data-sc-todos="without-closed"] div[data-refs-self*='\"done\"']:not(:focus-within),
+[data-sc-todos="without-closed"] div[data-refs-self*='\"canceled\"']:not(:focus-within),
+[data-sc-todos="without-closed"] div[data-refs-self*='\"waiting\"']:not(:focus-within) {
+  display: none;
+}
+[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*='\"done\"'] span.inline,
+[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*='\"canceled\"'] span.inline,
+[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*='\"waiting\"'] span.inline {
+  text-decoration: underline wavy;
+}
+```
+
+To be clear, while the `style` and `status` settings are compatible, they're intended to be mutually exclusive, for one or the other to be used.  And between the two options, using `status` with your `custom.css` is preferred.  The above json, because it includes `status` settings, should drop the use of the `style` settings and stylesheet rules should be transferred to the custom stylesheet.
 
 ## License
 [MIT](./LICENSE.md)

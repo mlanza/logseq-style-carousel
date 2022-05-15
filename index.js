@@ -38,11 +38,12 @@ async function getPage(){
   });
 }
 
-function setButton(key, char, tooltip){
+function setButton(key, char, tooltip, status){
+  top.document.body.setAttribute(`data-sc-${key}`, status || "");
   logseq.App.registerUIItem('toolbar', {
     key: `button-${key}`,
     template: `
-    <a class="button carousel" title="${tooltip}" data-key="${key}" data-on-click="cycle">
+    <a class="button carousel" title="${tooltip || ""}" data-key="${key}" data-on-click="cycle">
       <i class="ti ti-home"></i>
     </a>
     `,
@@ -65,13 +66,13 @@ async function cycle(el) {
 }
 
 async function refresh(key, btn, state){
-  const {char, tooltip, style, hits} = btn.styles[state.idx];
+  const {char, tooltip, status, style, hits} = btn.styles[state.idx];
   state.hits = hits;
-  logseq.provideStyle({
+  style && logseq.provideStyle({
     key: `active-${key}`,
     style
   });
-  setButton(key, char, tooltip || "");
+  setButton(key, char, tooltip, status);
   detectHits(key, btn, state);
 }
 
@@ -119,9 +120,9 @@ async function main(){
     if (btn.disabled) {
       delete config.buttons[key];
     } else {
-      const {char, tooltip} = btn.styles[0];
+      const {char, tooltip, status} = btn.styles[0];
       state[key] = {idx: 0};
-      setButton(key, char, tooltip);
+      setButton(key, char, tooltip, status);
     }
   }
 
