@@ -147,14 +147,14 @@ This feature was added later to permit stylesheet effects to be wholly included 
 So, for example, your custom stylesheet can be updated to include the following and the `style` attribute could be removed from your settings:
 
 ```css
-body[data-sc-todos="without-closed"] div[data-refs-self*='\"done\"']:not(:focus-within),
-body[data-sc-todos="without-closed"] div[data-refs-self*='\"canceled\"']:not(:focus-within),
-body[data-sc-todos="without-closed"] div[data-refs-self*='\"waiting\"']:not(:focus-within) {
+body[data-sc-todos="without-closed"] div[data-refs-self*="done"]:not(:focus-within),
+body[data-sc-todos="without-closed"] div[data-refs-self*="canceled"]:not(:focus-within),
+body[data-sc-todos="without-closed"] div[data-refs-self*="waiting"]:not(:focus-within) {
   display: none;
 }
-body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*='\"done\"'] span.inline,
-body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*='\"canceled\"'] span.inline,
-body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*='\"waiting\"'] span.inline {
+body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*="done"] span.inline,
+body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*="canceled"] span.inline,
+body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs-self*="waiting"] span.inline {
   text-decoration: underline wavy;
 }
 ```
