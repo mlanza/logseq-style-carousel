@@ -161,5 +161,38 @@ body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs
 
 While the `style` and `status` settings are compatible, they're intended to be mutually exclusive, for one or the other to be used.  And between the two options, using `status` with your `custom.css` is preferred.  The above json, because it includes `status` settings, should drop the use of the `style` settings and stylesheet rules should be transferred to the custom stylesheet.
 
+## Using the Eye icon from Wide Eyed
+
+Style Carousel is the successor of the Wide Eyed Plugin, but it uses Logseq's native font icons.  If you prefer the icon originally used by Wide Eyed, update your `custom.css`.
+
+Add the following import directive to the top:
+```
+@import url("https://at.alicdn.com/t/font_2409735_haugsknp36e.css");
+```
+
+In the stylesheet body add:
+```
+.carousel[data-key="todos"] i:before {
+  font-family: iconfont !important;
+}
+```
+
+Finally, update the `char`s used in the styles for the `todos` buttons in the Style Carousel plugin settings:
+
+```json
+      "styles": [
+        {
+          "tooltip": "Without closed tasks",
+          "char": "\\e6ed", //here
+          ...
+        },
+        {
+          "tooltip": "With closed tasks",
+          "char": "\\e600", //and here
+          ...
+        }
+      ]
+```
+
 ## License
 [MIT](./LICENSE.md)
