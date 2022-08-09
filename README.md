@@ -187,12 +187,12 @@ Finally, in the plugin settings update the `char`s used in the `styles` for the 
       "styles": [
         {
           "tooltip": "Without closed tasks",
-          "char": "\\e6ed", //<- here
+          "char": "\\e600", //<- here
           ...
         },
         {
           "tooltip": "With closed tasks",
-          "char": "\\e600", //<- here
+          "char": "\\e6ed", //<- here
           ...
         }
       ]
