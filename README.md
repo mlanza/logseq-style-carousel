@@ -161,9 +161,9 @@ body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs
 
 While the `style` and `status` settings are compatible, they're intended to be mutually exclusive, for one or the other to be used.  And between the two options, using `status` with your `custom.css` is preferred.  The above json, because it includes `status` settings, should drop the use of the `style` settings and stylesheet rules should be transferred to the custom stylesheet.
 
-## Using the Eye icon from Wide Eyed
+## Using the eye icon from Wide Eyed
 
-Style Carousel is the successor of the Wide Eyed Plugin, but it uses Logseq's native font icons.  If you prefer the icon originally used by Wide Eyed, update your `custom.css`.
+Style Carousel, the successor to the Wide Eyed Plugin, uses Logseq's native font icons.  If you prefer the icons originally used by Wide Eyed, update your `custom.css`.
 
 Add the following import directive to the top:
 ```css
