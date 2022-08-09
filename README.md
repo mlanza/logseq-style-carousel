@@ -177,7 +177,7 @@ In the body add:
 }
 ```
 
-Finally, in the plugin settings update the `char`s used in the `styles` for the `todos` buttons:
+Finally, in the plugin settings update the `char`s used in the `styles` for the `todos` button:
 
 ```js
   ...
