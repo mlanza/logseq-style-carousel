@@ -163,21 +163,21 @@ While the `style` and `status` settings are compatible, they're intended to be m
 
 ## Using the eye icon from Wide Eyed
 
-Style Carousel, the successor to the Wide Eyed Plugin, uses Logseq's native font icons.  If you prefer the icons originally used by Wide Eyed, update your `custom.css`.
+Style Carousel, the successor to the Wide Eyed Plugin, uses Logseq's native font icons.  If you prefer the icons originally used by the Wide Eyed Plugin, update your `custom.css`.
 
 Add the following import directive to the top:
 ```css
 @import url("https://at.alicdn.com/t/font_2409735_haugsknp36e.css");
 ```
 
-In the stylesheet body add:
+In the body add:
 ```css
 .carousel[data-key="todos"] i:before {
   font-family: iconfont !important;
 }
 ```
 
-Finally, update the `char`s used in the styles for the `todos` buttons in the Style Carousel plugin settings:
+Finally, in the plugin settings update the `char`s used in the `styles` for the `todos` buttons:
 
 ```js
   ...
