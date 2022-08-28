@@ -133,7 +133,7 @@ Unless there are at least 2 styles per button there is no toggle/cycle effect.  
 
 Use Character Map (a tool on Windows) to look up the codes associated with the [tabler-icons font](https://tablericons.com) ([download here](https://github.com/tabler/tabler-icons/tree/master/iconfont/fonts)) in order to select icons for your custom buttons.
 
-The `futures` button relies on classes made possible by the [Classy plugin](https://github.com/mlanza/logseq-classy).
+The `futures` button relies on classes made possible by [Classy](https://github.com/mlanza/logseq-classy).
 
 ### Statuses
 
@@ -142,9 +142,9 @@ Each button has a set of statuses.  Take the `todos` button.  Style Carousel wil
 * \[data-sc-todos="without-closed"\]
 * \[data-sc-todos="with-closed"\]
 
-This feature was added later to permit stylesheet effects to be wholly included in the `custom.css`.  This deprecates the `style` setting.  It is still supported, but using the stylesheet rules directly is preferred.
+This feature was added later to permit all styling to be defined in the `custom.css`.  While the `style` and `status` settings are compatible, they're designed to be mutually exclusive.  When `status` is used the CSS rules can be transferred to the custom stylesheet and the `style` setting can be dropped.  The use of the `style` setting remains supported but is now deprecated.
 
-So, for example, your custom stylesheet can be updated to include the following and the `style` attribute could be removed from your settings:
+So, for example, the `style` attributes can be removed from settings and these CSS rules added to your custom stylesheet:
 
 ```css
 body[data-sc-todos="without-closed"] div[data-refs-self*="done"]:not(:focus-within),
@@ -158,8 +158,6 @@ body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs
   text-decoration: underline wavy;
 }
 ```
-
-While the `style` and `status` settings are compatible, they're intended to be mutually exclusive, for one or the other to be used.  And between the two options, using `status` with your `custom.css` is preferred.  The above json, because it includes `status` settings, should drop the use of the `style` settings and stylesheet rules should be transferred to the custom stylesheet.
 
 ## Using the eye icon from Wide Eyed
 
