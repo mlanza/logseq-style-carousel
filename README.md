@@ -142,7 +142,7 @@ Each button has a set of statuses.  Take the `todos` button.  Style Carousel wil
 * \[data-sc-todos="without-closed"\]
 * \[data-sc-todos="with-closed"\]
 
-This feature was added later to permit all styling to be defined in the `custom.css`.  While the `style` and `status` settings are compatible, they're designed to be mutually exclusive.  When `status` is used the CSS rules can be transferred to the custom stylesheet and the `style` setting can be dropped.  The use of the `style` setting remains supported but is now deprecated.
+This feature was added later to permit all styling to be defined in the `custom.css`.  While the `style` and `status` settings are compatible, they're designed to be mutually exclusive.  When `status` is used the CSS rules can be transferred to the custom stylesheet and the `style` setting can be dropped.
 
 So, for example, the `style` attributes can be removed from settings and these CSS rules added to your custom stylesheet:
 
@@ -158,6 +158,8 @@ body[data-sc-todos="with-closed"] div#main-content-container:hover div[data-refs
   text-decoration: underline wavy;
 }
 ```
+
+The use of the `style` setting remains supported but is now deprecated.
 
 ## Using the eye icon from Wide Eyed
 
