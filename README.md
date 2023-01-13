@@ -8,7 +8,9 @@ Toggling is controlled by the eye button appearing in the toolbar.  If any match
 
 *Toggling to-do visibility isn't the purpose of this plugin.*  This default exists only to demonstrate what's possible.  Buttons can be added, removed or reconfigured to conditionally find and style content in any manner you can imagine.  It is not strictly for toggling visibility.  It can be configured to do all the amazing things CSS allows on whatever blocks you choose to target!
 
-The sample settings json below demonstrates additional options.  See the `desc` of each entry.
+The default behavior as described above comes without prerequisite.  However, to make customizations, one must be familiar with HTML, CSS, JSON and inspecting a live browser DOM.
+
+The sample settings JSON below demonstrates additional options.  See the `desc` of each entry.
 
 ## Settings
 
